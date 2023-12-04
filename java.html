@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <title>Ben's Resume - Profile HTML Page</title>
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="Tooplate">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <link rel="stylesheet" href="css/bootstrap.min.css">
+     <link rel="stylesheet" href="css/all.min.css">
+     <link rel="stylesheet" href="css/owl.carousel.min.css">
+     <link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="css/tooplate-ben-resume-style.css">
+<!--
+Tooplate 2120 Ben Resume
+https://www.tooplate.com/view/2120-ben-resume
+-->
+</head>
+
+<body data-spy="scroll" data-target="#navbarNav" data-offset="50">
+
+    <!-- MENU BAR -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+
+            <a class="navbar-brand" href="./index.html">
+                Suttipong Resume
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a href="./index.html" class="nav-link smoothScroll">Introduction</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="./java.html" class="nav-link smoothScroll">java</a>
+                    </li>
+
+                    <!-- <li class="nav-item">
+                        <a href="#testimonials" class="nav-link smoothScroll">Reviews</a>
+                    </li> -->
+
+                    <li class="nav-item">
+                        <a href="./api.html" class="nav-link smoothScroll">api</a>
+                    </li>
+                </ul>
+
+                <div class="mt-lg-0 mt-3 mb-4 mb-lg-0">
+                    <a href="#" class="custom-btn btn" download>Download CV</a>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero d-flex flex-column justify-content-center align-items-center" id="intro">
+
+        <div class="container">
+           <div class="row">
+
+                 <div class="mx-auto col-lg-5 col-md-5 col-10">
+                     <img src="images/team.png" class="img-fluid" alt="Ben Resume HTML Template">
+                 </div>
+
+                  <div class="d-flex flex-column justify-content-center align-items-center col-lg-7 col-md-7 col-12">
+                       <div class="hero-text">
+
+                           <h1 class="hero-title">👋 Suttipong Taoun</h1>
+                           <h1 class="hero-title">มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน วิทยาเขตขอนแก่น</h1>
+                         
+                       </div>
+                   </div>
+
+           </div>
+       </div>
+   </section>
+
+   <section class="about section-padding" id="about">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 col-12">
+                <h2 class="mb-4">This is Suttipong's LAB</h2>
+
+                <hr>
+                <h4 class="mb-4">Uppercase</h4>
+                <input id="str">
+                <button type="button" onclick="upperCase()">Submit</button>
+                <hr>
+                <h6 id="up"></h6>
+
+                <hr>
+                <h4 class="mb-4">Fahrenheit to Celsius</h4>
+                <input id="f">
+                <button type="button" onclick="tempConvert()">Submit</button>
+                <hr>
+                <h6 id="c"></h6>
+            </div>
+
+            <div class="col-lg-5 mx-auto col-md-6 col-12">
+                <img src="images/mumei.jpg" class="about-image img-fluid" alt="Ben's Resume HTML Template">
+            </div>
+
+        </div>
+        <div class="row about-third">
+            <div class="col-lg-4 col-md-4 col-12">
+                <hr>
+                <h4 class="mb-4">Day to Second</h4>
+                <input id="day">
+                <button type="button" onclick="dayToSecond()">Submit</button>
+                <hr>
+                <h6 id="second"></h6>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <hr>
+                <h4 class="mb-4">Are you over 18?</h4>
+                <input id="age">
+                <button type="button" onclick="howOld()">Submit</button>
+                <hr>
+                <h6 id="message"></h6>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <hr>
+                <h4 class="mb-4">Roll the dice</h4>
+                <button type="button" onclick="ranDom()">Roll</button>
+                <hr>
+                <h6 id="dice"></h6>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </div>
+  </div>
+</section>
+     <!-- SCRIPTS -->
+     <script src="js/jquery.min.js"></script>
+     <script src="js/bootstrap.min.js"></script>
+     <script src="js/smoothscroll.js"></script>
+     <script src="js/owl.carousel.min.js"></script>
+     <script src="js/custom.js"></script>
+
+     <script>
+        function upperCase() {
+            // Get the value of the input field with id="numb"
+            let str = document.getElementById("str").value;
+            let firstChar = str.charAt(0);
+            let upperFirstChar = firstChar.toUpperCase();
+            let restOfString = str.slice(1);
+            let a =  upperFirstChar + restOfString;
+            document.getElementById("up").innerHTML = a;
+        }
+
+        function tempConvert() {
+            let f = document.getElementById("f").value;
+            let c = (5/9) * (f - 32);
+            document.getElementById("c").innerHTML = c;
+        }
+
+        function dayToSecond() {
+            let day = document.getElementById("day").value;
+            let second = day * 24 * 60 * 60;
+            document.getElementById("second").innerHTML = second;
+        }
+
+        function howOld(){
+            let age = document.getElementById("age").value;
+            let message = age >= 18 ? 'Over 18' : 'Not over 18';
+            document.getElementById("message").innerHTML = message;
+        }
+
+        function ranDom(){
+            let dice = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("dice").innerHTML = dice;
+        }
+
+     </script>
+
+</body>
+</html>
