@@ -140,6 +140,16 @@ https://www.tooplate.com/view/2120-ben-resume
                 <hr>
                 <h6 id="dice"></h6>
             </div>
+            <div>
+                <hr>
+                <h2>Pet population</h2>
+                <canvas id="myChart" width="800" height="600"></canvas>
+            </div>
+            <div>
+                <hr>
+                <h2>Population Density</h2>
+                <canvas id="myChart2" width="1200" height="600"></canvas>
+            </div>
         </div>
     </div>
 </section>
@@ -153,6 +163,62 @@ https://www.tooplate.com/view/2120-ben-resume
      <script src="js/smoothscroll.js"></script>
      <script src="js/owl.carousel.min.js"></script>
      <script src="js/custom.js"></script>
+    
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+            'Dog',
+            'Cat',
+            'Another'
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: [620, 230, 150],
+            backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)'
+            ],
+            hoverOffset: 4
+        }]
+        }
+    });
+    </script>
+
+    <script>
+        fetch('country-by-population-density.json')
+        .then(response => response.json())
+        .then(jsonData => {
+            const labels = jsonData.map(entry => entry.country);
+            const densities = jsonData.map(entry => entry.density);
+
+            const ctx = document.getElementById('myChart2').getContext('2d');
+
+            const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                label: 'Population Density',
+                data: densities,
+                borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                y: {
+                    beginAtZero: true
+                }
+                }
+            }
+            });
+        });
+    </script>
 
      <script>
         function upperCase() {
