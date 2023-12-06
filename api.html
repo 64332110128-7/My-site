@@ -99,8 +99,21 @@ https://www.tooplate.com/view/2120-ben-resume
 
                     <hr>
                     <h2>Cat Facts</h2>
-                    <p id="demo2">Hi</p>
-                    <button onclick="myFunction()">Click to change </button>
+                    <p id="demo2">Click the button below to get Facts</p>
+                    <button onclick="myFunction()">Get Fact</button>
+                    <hr>
+                    <h2>Cat image</h2>
+                    <p id="catImage">Hi</p>
+                    <button onclick="catImage()">Click to change </button>
+
+                    <hr>
+                    <h2>Guess your Nation</h2>
+                    <input type="text" id="nameInput" placeholder="Enter a name">
+                    <button onclick="getNationality()">Guess</button>
+                    <p id="result"></p>
+
+                    <hr>
+                    <h6 id="fetchPrices"></้>
                 </div>
 
                 <div class="col-lg-5 mx-auto col-md-6 col-12">
@@ -108,19 +121,24 @@ https://www.tooplate.com/view/2120-ben-resume
                 </div>
 
             </div>
-            <div class="row about-third">
-            	<div class="col-lg-4 col-md-4 col-12">
-                <h3>Cat fact No.1</h3>
-                <p>One reason that kittens sleep so much is because a growth hormone is released only during sleep.</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-12">
-                <h3>Cat fact No.2</h3>
-                <p>Cats' hearing stops at 65 khz (kilohertz); humans' hearing stops at 20 khz.</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-12">
-                <h3>Cat fact No.3</h3>
-                <p>A cat's brain is more similar to a man's brain than that of a dog.</p>
-                </div>
+            
+            <div>
+                <hr>
+                <h2>Enter your Email</h2>
+                <form name="contact-form"
+                    method="POST" 
+                    action="https://script.google.com/macros/s/AKfycbw-2WIU5OP162ZGhTKQIBMWHu2B-Y9jzT7Y5jCJ48qwO0UI6xdg8zNZXsySGoe8qygdag/exec"
+                    >
+                    <input name="Email" type="email" placeholder="Email" required>
+                    <input name="Name" type="text" placeholder="Name" required>
+                    <input name="Topic" type="text" placeholder="Topic" required>
+                    <button type="submit">Send</button>
+                </form> 
+                
+                <hr>
+                <iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3h1X8mriULyYvzFRKSE3R9dPfYH_83nkN48n5InmUHakPESj7-5-F4rYiwACOlVrb22w1qn5DQEEU/pubchart?oid=1210490282&amp;format=interactive"></iframe>
+                <hr>
+                <iframe width="100%" height="800" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ3h1X8mriULyYvzFRKSE3R9dPfYH_83nkN48n5InmUHakPESj7-5-F4rYiwACOlVrb22w1qn5DQEEU/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
             </div>
         </div>
     </section>
@@ -136,21 +154,87 @@ https://www.tooplate.com/view/2120-ben-resume
      <script src="js/custom.js"></script>
 
      <script>
-      function myFunction() {
-        fetch("https://catfact.ninja/fact")
-          .then(function(response){
-            return response.json()
-          })
-          .then(function(data){
-            let txt = "";
-              for (let x in data) {
-                txt += data[x] + " ";
-              document.getElementById("demo2").innerHTML = txt;
-              };
-          
-            return data;
-          })  
-      }
+        function myFunction() {
+            fetch("https://catfact.ninja/fact")
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(data){
+                let txt = "";
+                for (let x in data) {
+                    txt += data[x] + " ";
+                document.getElementById("demo2").innerHTML = txt;
+                };
+            
+                return data;
+            })  
+        }
+
+        function catImage() {
+        fetch('https://api.thecatapi.com/v1/images/search')
+            .then(response => response.json())
+            .then(data => {
+            document.getElementById('catImage').innerHTML = `<img src="${data[0].url}" alt="Cat Image" width="300">`;
+            })
+            .catch(error => {
+            console.error('Error fetching cat image:', error);
+            });
+        }
+        catImage();
+
+        function getNationality() {
+        const name = document.getElementById('nameInput').value;
+
+        fetch(`https://api.nationalize.io/?name=${name}`)
+            .then(response => response.json())
+            .then(data => {
+            const resultElement = document.getElementById('result');
+            if (data.country.length > 0) {
+                const countries = data.country.map(country => `${country.country_id} (${(country.probability * 100).toFixed(2)}%)`).join(', ');
+                resultElement.innerHTML = `Name: ${data.name}, Probable Nationalities: ${countries}`;
+            } else {
+                resultElement.innerHTML = 'No nationality data available for this name.';
+            }
+            })
+        }
+        
+        function fetchPrices() {
+        fetch('https://api.coinbase.com/v2/exchange-rates')
+            .then(response => response.json())
+            .then(data => {
+            const selectedCurrencies = ['BTC', 'ETH', 'LTC'];
+            const rates = data.data.rates;
+            const selectedExchangeRatesElement = document.getElementById('fetchPrices');
+
+            let html = '<h1>Coinbase</h1>';
+            html += '<ul>';
+            selectedCurrencies.forEach(currency => {
+                const rate = rates[currency];
+                html += `<li>${currency}: ${rate}</li>`;
+            });
+            html += '</ul>';
+
+            selectedExchangeRatesElement.innerHTML = html;
+            })
+            .catch(error => {
+            console.error('Error fetching exchange rates:', error);
+            });
+        }
+
+        setInterval(fetchPrices, 6000);
+        fetchPrices();
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw-2WIU5OP162ZGhTKQIBMWHu2B-Y9jzT7Y5jCJ48qwO0UI6xdg8zNZXsySGoe8qygdag/exec'
+
+        const form = document.forms['contact-form']
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => alert("Thank you! your form is submitted successfully." ))
+            .then(() => { window.location.reload(); })
+            .catch(error => console.error('Error!', error.message))
+        })
      </script>
 
 </body>
